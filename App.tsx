@@ -1,118 +1,111 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import { Button, ScrollView, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React from 'react'
+import Banner from './component/Banner'
+import Block1 from './component/Block1'
+import Block2 from './component/Block2'
+import Block3 from './component/Block3'
+import { Theme, useTheme } from './component/Theme'
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+const App = () => {
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
+    <ScrollView>
+<View  style={st.container}>
+  <Theme>
+  <BodyApp/>
+  </Theme>
+  
+   </View>
+    </ScrollView>
+    
+  )
+}
+const BodyApp =()=>{
+   // sử dụng hook để thao tác với theme
+ const {theme, toggleTheme } = useTheme();
+  return(
+<View style={[st.khung, {backgroundColor: theme==='light'?'#927de5':'#4af4ca'}]}>
+
+
+<TouchableOpacity onPress={toggleTheme}>
+  <Text style={{width:30,height:26,alignSelf:'flex-end',margin:10,fontSize:20,textAlign:'center',borderRadius:10,backgroundColor:'#0eb9ef'}}>*</Text>
+</TouchableOpacity>
+         
+<Banner img={'https://gcs.tripi.vn/public-tripi/tripi-feed/img/474111yTp/tong-hop-logo-fpt-polytechnic-dep_043058591.jpg'} />
+
+<Block1 style={{ backgroundColor: '#ccffcc' ,elevation: 5,  shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.8, }} disableAvoidStatusBar={true}>
+       <Text style={{fontSize:20,fontStyle:'normal',color:'red',marginBottom:5}}>Thông tin cá nhân</Text>
+       <TextInput
+         placeholder="Name..."
+         style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10,borderRadius:10 }}
+       />
+        <TextInput
+         placeholder="Email..."
+         style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10,borderRadius:10  }}
+       />
+           <TextInput
+         placeholder="Phone..."
+         style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10,borderRadius:10  }}
+       />
+           <TextInput
+         placeholder="Old..."
+         style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10,borderRadius:10  }}
+       />
+           <TextInput
+         placeholder="Year of Birth..."
+         style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10,borderRadius:10  }}
+       />
+       <TouchableOpacity style={{width:'50%',height:40,borderWidth:1,borderColor:'gray',alignSelf:'center',alignItems:'center',borderRadius:10,backgroundColor:'#0eb9ef',padding:7}} >
+        <Text style={{fontSize:17,color:'black'}}>Cập nhật</Text>
+       </TouchableOpacity>
+     </Block1>
+     <Block2 style={{ backgroundColor: '#ccffcc' ,elevation: 5,  shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.8, }} disableAvoidStatusBar={true}>
+       <Text style={{fontSize:20,fontStyle:'normal',color:'red',marginBottom:5}}>Thông tin khóa học</Text>
+       <TextInput
+         placeholder="Course name..."
+         style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10,borderRadius:10 }}
+       />
+        <TextInput
+         placeholder="Course description..."
+         style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10,borderRadius:10  }}
+       />
+           <TextInput
+         placeholder="Course content..."
+         style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10,borderRadius:10  }}
+       />
+           <TextInput
+         placeholder="Course duration..."
+         style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10,borderRadius:10  }}
+       />
+           <TextInput
+         placeholder="Participation fee..."
+         style={{ height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 10,borderRadius:10  }}
+       />
+       <TouchableOpacity style={{width:'50%',height:40,borderWidth:1,borderColor:'gray',alignSelf:'center',alignItems:'center',borderRadius:10,backgroundColor:'#0eb9ef',padding:7}} >
+        <Text style={{fontSize:17,color:'black'}}>Cập nhật</Text>
+       </TouchableOpacity>
+     </Block2>
+  
+
+
+<Block3 infomation="Thông tin liên hệ" name="Lê Thế Duy" email="leduy@fpt.com"  phone="0123456789" address="Địa chỉ: 123 Đường Nam, Quận 1, TP. HCM"  />
+ 
+
+
+</View>
   );
+
 }
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+export default App
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+const st = StyleSheet.create({
+  container:{
+    flex:1,
+    backgroundColor:'pink'
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
-
-export default App;
+  khung:{
+    width:'100%',
+     height: '100%',
+     
+   }
+})
